@@ -1,68 +1,56 @@
 package creational.builder;
 
 public class Main {
-	public static void main(String[] args) {
-		Car car = new CarBuilder().buildMake("Mercedes").buildTransmission(Transmission.AUTO).buildSpeed(240).build();
 
-		System.out.println(car);
-	}
+    public static void main(String[] args) {
+        Car car = new Car()
+                .buildMake("Mercedes")
+                .buildTransmission(Transmission.AUTO)
+                .buildSpeed(240)
+                .build();
+
+        Account account2 = new Account()
+                .accountHolder("Andrii")
+                .accountName("Hromov")
+                .accountNumber(200l)
+                .balance(6000000000d)
+                .build();
+
+        System.out.println(account2 + "\n" + car);
+    }
 }
 
 enum Transmission {
-	AUTO, MANUAL
+    AUTO, MANUAL
 }
 
 class Car {
-	
-	String make = "Default";
-	Transmission transmission = Transmission.MANUAL;
-	int maxSpeed = 120;
 
-	public void setMake(String make) {
-		this.make = make;
-	}
+    String make = "Default";
+    Transmission transmission = Transmission.MANUAL;
+    int maxSpeed = 120;
 
-	public void setMaxSpeed(int maxSpeed) {
-		this.maxSpeed = maxSpeed;
-	}
+    Car buildMake(String m) {
+        this.make = m;
+        return this;
+    }
 
-	public void setTransmission(Transmission transmission) {
-		this.transmission = transmission;
-	}
+    Car buildTransmission(Transmission t) {
+        this.transmission = t;
+        return this;
+    }
 
-	@Override
-	public String toString() {
-		return "Car [make = " + make + ", transmission = " + transmission + ", speed = " + maxSpeed + "]";
-	}
-}
+    Car buildSpeed(int s) {
+        this.maxSpeed = s;
+        return this;
+    }
 
-class CarBuilder {
-	
-	String m;
-	Transmission t;
-	int s;
+    Car build() {
+        return this;
+    }
 
-	CarBuilder buildMake(String m) {
-		this.m = m;
-		return this;
-	}
-
-	CarBuilder buildTransmission(Transmission t) {
-		this.t = t;
-		return this;
-	}
-
-	CarBuilder buildSpeed(int s) {
-		this.s = s;
-		return this;
-	}
-
-	Car build() {
-		Car car = new Car();
-		car.setMake(m);
-		car.setTransmission(t);
-		car.setMaxSpeed(s);
-		return car;
-	}
-	
+    @Override
+    public String toString() {
+        return "Car [make = " + make + ", transmission = " + transmission + ", speed = " + maxSpeed + "]";
+    }
 }
