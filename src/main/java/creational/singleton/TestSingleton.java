@@ -13,9 +13,4 @@ public class TestSingleton {
 
 	private TestSingleton() {
 	}
-
-	public void print() {
-		System.out.println(this);
-	}
-
 }
